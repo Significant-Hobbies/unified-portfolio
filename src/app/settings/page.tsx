@@ -49,6 +49,13 @@ export default async function Settings({
           use it for advertising.
         </p>
         <p>
+          When operational monitoring is configured, we send App Health at
+          ingest.sassmaker.com only the HTTP method, a fixed route group,
+          response status, request duration and timestamp. This telemetry does
+          not include portfolio data, request contents, query values, cookies,
+          tokens or account identifiers.
+        </p>
+        <p>
           An AI client receives read-only portfolio information only after you
           authorize its MCP access. That client's own privacy policy applies to
           information it receives. You can revoke MCP access in Settings.
