@@ -67,6 +67,20 @@ export default async function Layout({
             <footer>
               Unified Portfolio <span>Observe clearly. Stay in control.</span>
             </footer>
+            {signedIn && (
+              <>
+                <script
+                  src="https://sassmaker.com/project-strip.js"
+                  data-project="unified-portfolio"
+                  defer
+                />
+                <script
+                  src="https://sassmaker.com/ai-chat-footer.js"
+                  data-name="Unified Portfolio"
+                  defer
+                />
+              </>
+            )}
           </div>
         </div>
       </body>
