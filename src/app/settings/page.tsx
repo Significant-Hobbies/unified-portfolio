@@ -3,6 +3,7 @@ import { withUser } from "../../server/tenant";
 import { sessionIdentity } from "../../server/auth";
 import { googleReady } from "../../server/google";
 import { PageTitle } from "../../components/ui";
+import { Landing } from "../../components/landing";
 import { ownerSession } from "../../server/auth";
 import { origin, hash } from "../../server/crypto";
 import { record } from "../../db/store";
@@ -89,6 +90,7 @@ export default async function Settings({
           q.consent,
         )
       : null;
+  if (!session) return <Landing ready={ready} notice={q.notice} />;
   return (
     <>
       <PageTitle
@@ -100,32 +102,7 @@ export default async function Settings({
           {q.notice}
         </div>
       )}
-      {!session ? (
-        <section className="panel login">
-          <h2>Sign in with Google</h2>
-          <p>
-            Your portfolio is private. Sign in to view or connect investments.
-          </p>
-          <p>
-            <a href="/settings?document=privacy">Privacy policy</a>
-          </p>
-          {ready ? (
-            <form action="/api/auth/google/start" method="post">
-              <button className="button">Continue with Google</button>
-              <p className="footnote">
-                Your account has its own private portfolio. Other people cannot
-                see your investments.
-              </p>
-            </form>
-          ) : (
-            <div className="notice">
-              Private server setup is not complete. The operator must configure
-              storage, encryption and Google sign-in before live access is
-              enabled.
-            </div>
-          )}
-        </section>
-      ) : (
+      {session && (
         <>
           {consent && consent.owner === hash(session) && (
             <section className="panel consent">
