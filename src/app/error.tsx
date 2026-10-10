@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "../components/primitives";
 export default function ErrorPage({ reset }: { reset: () => void }) {
   return (
     <div className="empty">
@@ -6,9 +7,9 @@ export default function ErrorPage({ reset }: { reset: () => void }) {
       <p>
         Stored observations have not been replaced. Try loading the page again.
       </p>
-      <button className="button" onClick={reset}>
+      <Button className="button" onClick={reset}>
         Try again
-      </button>
+      </Button>
     </div>
   );
 }

@@ -25,6 +25,7 @@
     "@cfworker/json-schema": "^4.1.1",
     "@modelcontextprotocol/sdk": "1.30.0",
     "@saas-maker/app-health": "https://github.com/sass-maker/app-health/releases/download/node-v0.4.0/saas-maker-app-health-0.4.0.tgz",
+    "@saas-maker/ui": "github:sass-maker/ui-library#v0.1.18&path:/packages/ui",
     "decimal.js": "^10.6.0",
     "jose": "^6.2.12",
     "next": "16.3.5",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.54.8",
     "@playwright/test": "^1.58.0",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^24.0.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
@@ -44,6 +46,7 @@
     "@vitejs/plugin-rsc": "^0.5.34",
     "miniflare": "4.20260730.0",
     "prettier": "^3.9.6",
+    "tailwindcss": "^4.3.3",
     "tsx": "^4.20.0",
     "typescript": "^5.9.0",
     "vinext": "1.0.0-beta.9",

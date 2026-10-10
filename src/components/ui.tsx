@@ -1,3 +1,4 @@
+import { Button } from "./primitives";
 import Link from "next/link";
 import type { Portfolio } from "../core/portfolio";
 import type { Connection } from "../core/model";
@@ -118,9 +119,11 @@ export function Empty({
       </div>
       <h2>{title}</h2>
       <p>{text}</p>
-      <Link className="button" href="/accounts">
-        Connect investments <span aria-hidden="true">↗</span>
-      </Link>
+      <Button asChild>
+        <Link href="/accounts">
+          Connect investments <span aria-hidden="true">↗</span>
+        </Link>
+      </Button>
     </div>
   );
 }
@@ -137,12 +140,12 @@ export function ProviderAction({
 }) {
   return (
     <form action={`/api/providers/${id}/${action}`} method="post">
-      <button
+      <Button
         disabled={disabled}
         className={action === "disconnect" ? "text-button" : "button secondary"}
       >
         {label}
-      </button>
+      </Button>
     </form>
   );
 }

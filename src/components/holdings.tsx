@@ -1,4 +1,13 @@
 "use client";
+import {
+  Input,
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "./primitives";
 import { useState } from "react";
 import Decimal from "decimal.js";
 import type { Holding } from "../core/model";
@@ -46,7 +55,7 @@ export function HoldingsTable({ holdings }: { holdings: Holding[] }) {
       <div className="filters">
         <label className="search">
           Search holdings
-          <input
+          <Input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Company, ticker or ISIN"
@@ -88,9 +97,9 @@ export function HoldingsTable({ holdings }: { holdings: Holding[] }) {
         aria-label="Holdings table"
         tabIndex={0}
       >
-        <table>
-          <thead>
-            <tr>
+        <Table>
+          <TableHeader>
+            <TableRow>
               {[
                 "Instrument",
                 "Owner",
@@ -104,57 +113,59 @@ export function HoldingsTable({ holdings }: { holdings: Holding[] }) {
                 "P&L %",
                 "Allocation",
               ].map((h) => (
-                <th scope="col" key={h}>
+                <TableHead scope="col" key={h}>
                   {h}
-                </th>
+                </TableHead>
               ))}
-            </tr>
-          </thead>
-          <tbody>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {rows.map((h, i) => {
               const pnl =
                 h.investedValue === null
                   ? null
                   : new Decimal(h.marketValue).minus(h.investedValue);
               return (
-                <tr key={h.accountId + h.instrumentId + i}>
-                  <td>
+                <TableRow key={h.accountId + h.instrumentId + i}>
+                  <TableCell>
                     <strong>{h.name}</strong>
                     <small>
                       {h.ticker} · {h.exchange} · {h.currency}
                     </small>
-                  </td>
-                  <td>{h.ownerLabel || "Unlabeled"}</td>
-                  <td>
+                  </TableCell>
+                  <TableCell>{h.ownerLabel || "Unlabeled"}</TableCell>
+                  <TableCell>
                     {names[h.custodyBroker] || h.custodyBroker}
                     <small>As of {syncDate(h.asOf)}</small>
-                  </td>
-                  <td className="numeric">{h.quantity ?? "Unknown"}</td>
-                  <td className="numeric">
+                  </TableCell>
+                  <TableCell className="numeric">
+                    {h.quantity ?? "Unknown"}
+                  </TableCell>
+                  <TableCell className="numeric">
                     {money(h.averagePrice, h.currency)}
-                  </td>
-                  <td className="numeric">
+                  </TableCell>
+                  <TableCell className="numeric">
                     {money(h.marketPrice, h.currency)}
-                  </td>
-                  <td className="numeric">
+                  </TableCell>
+                  <TableCell className="numeric">
                     {money(h.investedValue, h.currency)}
-                  </td>
-                  <td className="numeric strong">
+                  </TableCell>
+                  <TableCell className="numeric strong">
                     {money(h.marketValue, h.currency)}
-                  </td>
-                  <td
+                  </TableCell>
+                  <TableCell
                     className={`numeric ${pnl?.isNegative() ? "negative" : "positive"}`}
                   >
                     {money(pnl?.toFixed() ?? null, h.currency)}
-                  </td>
-                  <td className="numeric">
+                  </TableCell>
+                  <TableCell className="numeric">
                     {pnl &&
                     h.investedValue &&
                     !new Decimal(h.investedValue).isZero()
                       ? pnl.div(h.investedValue).times(100).toFixed(2) + "%"
                       : "Unknown"}
-                  </td>
-                  <td className="numeric">
+                  </TableCell>
+                  <TableCell className="numeric">
                     {total(h.currency).isZero()
                       ? "—"
                       : new Decimal(h.marketValue)
@@ -162,12 +173,12 @@ export function HoldingsTable({ holdings }: { holdings: Holding[] }) {
                           .times(100)
                           .toFixed(1) + "%"}
                     <small>of {h.currency} holdings</small>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               );
             })}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
         {!rows.length && (
           <p className="no-results">No holdings match these filters.</p>
         )}
