@@ -1579,3 +1579,110 @@ dd {
 .nav-label {
   text-transform: var(--ui-case);
 }
+
+/* Route fallbacks reuse ledger geometry; placeholders never imply real values. */
+.ledger-loading {
+  min-width: 0;
+}
+.ledger-skeleton {
+  background: var(--brand-soft);
+  border-radius: 6px;
+}
+.skeleton-line {
+  height: 14px;
+  max-width: 100%;
+}
+.skeleton-heading {
+  width: min(100%, 65ch);
+}
+.skeleton-title {
+  width: 29ch;
+  height: clamp(36px, 3.75vw, 50px);
+}
+.skeleton-description {
+  width: 45ch;
+  height: 19px;
+}
+.skeleton-heading .skeleton-description {
+  margin-top: 12px;
+}
+.skeleton-health {
+  width: 180px;
+  height: 20px;
+  margin-block: 12px;
+  flex-shrink: 0;
+}
+.skeleton-section-title {
+  width: 20ch;
+  height: 25px;
+}
+.skeleton-caption {
+  width: 14ch;
+  height: 16px;
+  margin-block: 4px;
+}
+.skeleton-number {
+  width: 240px;
+  height: clamp(42px, 4.9vw, 66px);
+  margin: 2px 0 12px;
+}
+.skeleton-footnote {
+  height: 36px;
+  width: 100%;
+  margin: 18px 0;
+}
+.skeleton-control {
+  height: 44px;
+  width: 100%;
+  margin-top: 5px;
+}
+.skeleton-action {
+  width: 165px;
+}
+.skeleton-disclosure {
+  width: 130px;
+}
+.skeleton-period {
+  width: 44px;
+  height: 44px;
+}
+.skeleton-chart {
+  width: 100%;
+  aspect-ratio: 800 / 240;
+  max-height: 280px;
+}
+.skeleton-filters > div {
+  flex: 1;
+  min-width: 130px;
+}
+.skeleton-filters > .search {
+  min-width: 220px;
+}
+.skeleton-cell {
+  width: 9ch;
+}
+.skeleton-broker {
+  width: 49px;
+  height: 49px;
+  flex-shrink: 0;
+}
+.skeleton-prose {
+  width: 100%;
+  height: 62px;
+}
+@media (max-width: 700px) {
+  .skeleton-filters > .search {
+    min-width: 100%;
+  }
+  .skeleton-number {
+    height: 53px;
+  }
+  .skeleton-chart {
+    min-height: 155px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ledger-skeleton {
+    animation: none;
+  }
+}
