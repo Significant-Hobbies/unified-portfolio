@@ -1,3 +1,11 @@
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "./primitives";
 import type { Position } from "../core/model";
 import { money, names, age } from "./ui";
 export function PositionsTable({ positions }: { positions: Position[] }) {
@@ -8,9 +16,9 @@ export function PositionsTable({ positions }: { positions: Position[] }) {
       aria-label="Open positions"
       tabIndex={0}
     >
-      <table>
-        <thead>
-          <tr>
+      <Table>
+        <TableHeader>
+          <TableRow>
             {[
               "Instrument",
               "Broker / observed",
@@ -20,32 +28,40 @@ export function PositionsTable({ positions }: { positions: Position[] }) {
               "Reported unrealized P&L",
               "Reported realized P&L",
             ].map((h) => (
-              <th scope="col" key={h}>
+              <TableHead scope="col" key={h}>
                 {h}
-              </th>
+              </TableHead>
             ))}
-          </tr>
-        </thead>
-        <tbody>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {positions.map((p, i) => (
-            <tr key={p.accountId + p.instrumentId + i}>
-              <td>
+            <TableRow key={p.accountId + p.instrumentId + i}>
+              <TableCell>
                 <strong>{p.ticker}</strong>
                 <small>{p.exchange}</small>
-              </td>
-              <td>
+              </TableCell>
+              <TableCell>
                 {names[p.source]}
                 <small>{age(p.asOf)}</small>
-              </td>
-              <td className="numeric">{p.quantity}</td>
-              <td className="numeric">{money(p.averagePrice, p.currency)}</td>
-              <td className="numeric">{money(p.marketPrice, p.currency)}</td>
-              <td className="numeric">{money(p.unrealizedPnL, p.currency)}</td>
-              <td className="numeric">{money(p.realizedPnL, p.currency)}</td>
-            </tr>
+              </TableCell>
+              <TableCell className="numeric">{p.quantity}</TableCell>
+              <TableCell className="numeric">
+                {money(p.averagePrice, p.currency)}
+              </TableCell>
+              <TableCell className="numeric">
+                {money(p.marketPrice, p.currency)}
+              </TableCell>
+              <TableCell className="numeric">
+                {money(p.unrealizedPnL, p.currency)}
+              </TableCell>
+              <TableCell className="numeric">
+                {money(p.realizedPnL, p.currency)}
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   );
 }

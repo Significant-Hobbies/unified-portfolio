@@ -1,3 +1,4 @@
+import { Button } from "./primitives";
 // Signed-out public page. Presentation only: the sign-in form posts to the
 // same endpoint as before, and the "not open yet" state is shown exactly when
 // googleReady() is false.
@@ -9,18 +10,18 @@ function SignIn({ ready, id }: { ready: boolean; id?: string }) {
       className="landing-cta"
       id={id}
     >
-      <button className="button landing-button">
+      <Button className="button landing-button">
         Continue with Google <span aria-hidden="true">→</span>
-      </button>
+      </Button>
       <a className="landing-link" href="/settings?document=privacy">
         Read the privacy policy
       </a>
     </form>
   ) : (
     <div className="landing-cta" id={id}>
-      <button className="button landing-button" disabled>
+      <Button className="button landing-button" disabled>
         Continue with Google
-      </button>
+      </Button>
       <a className="landing-link" href="/settings?document=privacy">
         Read the privacy policy
       </a>

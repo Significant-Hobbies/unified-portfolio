@@ -1,20 +1,56 @@
+@import "@saas-maker/ui/styles.css";
+
 * {
   box-sizing: border-box;
 }
 :root {
-  --canvas: #f6f7f2;
+  --background: #f6f7f2;
+  --foreground: #182e29;
   --surface: #fff;
-  --ink: #182e29;
-  --muted: #56665f;
-  --green: #235d45;
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
+  --brand: #235d45;
+  --brand-foreground: #fff;
+  --brand-soft: #dce6d8;
+  --brand-ink: var(--brand);
+  --primary: var(--brand);
+  --primary-foreground: var(--brand-foreground);
+  --secondary: #eef1e9;
+  --secondary-foreground: var(--foreground);
+  --muted: #edf1e7;
+  --muted-foreground: #56665f;
+  --accent: #e3e9de;
+  --accent-foreground: var(--brand);
   --border: #dbe2da;
-  --amber: #805418;
+  --input: #bbc8b8;
+  --ring: #578f70;
+  --warning: #805418;
+  --destructive: #943f36;
+  --sidebar: var(--secondary);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--brand);
+  --sidebar-primary-foreground: var(--brand-foreground);
+  --sidebar-accent: var(--brand-soft);
+  --sidebar-accent-foreground: var(--brand);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-text: var(--font-sans);
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --radius: 8px;
+  --canvas: var(--background);
+  --ink: var(--foreground);
+  --green: var(--brand);
+  --amber: var(--warning);
 }
 body {
   margin: 0;
   background: var(--canvas);
   color: var(--ink);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-sans);
   font-size: 14px;
   line-height: 1.6;
 }
@@ -36,6 +72,7 @@ summary {
 }
 button,
 summary {
+  text-transform: var(--ui-case);
   cursor: pointer;
 }
 a:focus-visible,
@@ -44,7 +81,8 @@ input:focus-visible,
 select:focus-visible,
 summary:focus-visible,
 [tabindex]:focus-visible {
-  outline: 3px solid #578f70;
+  outline: 3px solid var(--ring);
+  box-shadow: none;
   outline-offset: 4px;
 }
 button:disabled {
@@ -57,7 +95,8 @@ p {
   margin: 0;
 }
 h1 {
-  font-family: Georgia, serif;
+  text-transform: var(--display-case);
+  font-family: var(--font-display);
   font-size: clamp(29px, 3vw, 40px);
   font-weight: 400;
   letter-spacing: -0.025em;
@@ -65,6 +104,7 @@ h1 {
   text-wrap: balance;
 }
 h2 {
+  text-transform: var(--display-case);
   font-size: 18px;
   font-weight: 600;
   line-height: 1.4;
@@ -72,10 +112,10 @@ h2 {
 small {
   display: block;
   font-size: 12px;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 p {
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 .app {
   display: flex;
@@ -86,7 +126,7 @@ p {
   flex-shrink: 0;
   border-right: 1px solid var(--border);
   padding: 34px 22px 28px;
-  background: #eef1e9;
+  background: var(--sidebar);
   position: fixed;
   inset: 0 auto 0 0;
   display: flex;
@@ -106,7 +146,7 @@ p {
   margin-top: 7px;
 }
 .brand-mark {
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
   background: var(--green);
   color: #fff;
   font-size: 35px;
@@ -118,23 +158,27 @@ p {
 }
 .nav-label {
   font-size: 10px;
-  color: var(--muted);
+  color: var(--muted-foreground);
   letter-spacing: 0.1em;
   margin: 58px 12px 15px;
 }
 nav {
+  text-transform: var(--ui-case);
   display: flex;
   flex-direction: column;
   gap: 7px;
 }
 nav a {
+  height: auto;
+  justify-content: flex-start;
+  box-shadow: none;
   display: flex;
   align-items: center;
   gap: 14px;
   padding: 12px 14px;
   min-height: 46px;
   border-radius: 7px;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 nav a span {
   font-size: 20px;
@@ -145,7 +189,7 @@ nav a:hover {
   background: #e3e9de;
 }
 nav a[aria-current] {
-  background: #dce6d8;
+  background: var(--brand-soft);
   color: var(--green);
   font-weight: 600;
 }
@@ -173,7 +217,7 @@ nav a[aria-current] {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--muted);
+  color: var(--muted-foreground);
   font-size: 12px;
 }
 .owner-mark {
@@ -191,7 +235,7 @@ footer {
   border-top: 1px solid var(--border);
   padding: 22px 42px;
   font-size: 11px;
-  color: var(--muted);
+  color: var(--muted-foreground);
   display: flex;
   justify-content: space-between;
 }
@@ -266,7 +310,7 @@ footer {
 }
 .valuation-label {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--muted-foreground);
   margin-bottom: 16px;
 }
 .currency-values {
@@ -280,7 +324,7 @@ footer {
 .currency-tag {
   font-size: 11px;
   font-weight: 600;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 .hero-number {
   font-size: clamp(30px, 3.5vw, 47px);
@@ -294,7 +338,7 @@ footer {
   display: flex;
   gap: 20px;
   justify-content: space-between;
-  color: var(--muted);
+  color: var(--muted-foreground);
   font-size: 12px;
   margin: 4px 0;
 }
@@ -323,7 +367,7 @@ footer {
 }
 .chart-section {
   margin: 0 0 30px;
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 25px;
@@ -336,7 +380,7 @@ footer {
 .periods button {
   border: 0;
   background: transparent;
-  color: var(--muted);
+  color: var(--muted-foreground);
   padding: 7px 10px;
   min-height: 44px;
   font-size: 11px;
@@ -348,7 +392,7 @@ footer {
   font-weight: 700;
 }
 .periods button:hover {
-  background: #eef1e9;
+  background: var(--sidebar);
 }
 .chart {
   width: 100%;
@@ -356,13 +400,13 @@ footer {
   display: block;
 }
 .chart text {
-  fill: var(--muted);
+  fill: var(--muted-foreground);
   font-size: 11px;
 }
 .chart-range {
   display: flex;
   justify-content: space-between;
-  color: var(--muted);
+  color: var(--muted-foreground);
   font-size: 11px;
 }
 .chart-empty {
@@ -379,7 +423,7 @@ footer {
   gap: 24px;
 }
 .panel {
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 25px;
@@ -487,6 +531,8 @@ footer {
   color: var(--amber);
 }
 .button {
+  height: auto;
+  white-space: normal;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
@@ -531,7 +577,7 @@ footer {
   margin-bottom: 20px;
 }
 .empty h2 {
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
   font-size: 27px;
   font-weight: 400;
 }
@@ -548,7 +594,7 @@ footer {
 }
 label {
   font-size: 11px;
-  color: var(--muted);
+  color: var(--muted-foreground);
   display: block;
 }
 input,
@@ -572,7 +618,7 @@ input::placeholder {
 }
 .table-scroll {
   overflow-x: auto;
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 10px;
 }
@@ -590,7 +636,7 @@ td {
 }
 th {
   font-size: 10px;
-  color: var(--muted);
+  color: var(--muted-foreground);
   background: #edf1e7;
   font-weight: 500;
 }
@@ -626,7 +672,7 @@ tbody tr:hover {
   gap: 20px;
 }
 .account {
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 25px;
@@ -655,7 +701,7 @@ tbody tr:hover {
 .label {
   display: block;
   font-size: 11px;
-  color: var(--muted);
+  color: var(--muted-foreground);
   margin-bottom: 6px;
 }
 .account-body strong {
@@ -674,7 +720,7 @@ tbody tr:hover {
 }
 .disconnect summary {
   padding: 12px 0;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 details p {
   max-width: 35ch;
@@ -684,7 +730,7 @@ summary {
   min-height: 44px;
   padding: 12px 0;
   font-size: 12px;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 .technical {
   margin-top: 12px;
@@ -720,7 +766,7 @@ summary {
   border-bottom: 1px solid var(--border);
 }
 dt {
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 dd {
   margin: 0;
@@ -743,7 +789,7 @@ dd {
   position: absolute;
   left: -10000px;
   z-index: 20;
-  background: white;
+  background: var(--surface);
   padding: 12px;
 }
 .skip:focus {
@@ -799,7 +845,7 @@ dd {
     padding: 18px 18px 0;
     border-right: 0;
     border-bottom: 1px solid var(--border);
-    background: #eef1e9;
+    background: var(--sidebar);
   }
   .brand {
     font-size: 19px;
@@ -982,6 +1028,7 @@ dd {
 }
 
 .connect-dialog {
+  margin: auto;
   width: min(520px, calc(100vw - 32px));
   max-height: calc(100dvh - 48px);
   overflow-y: auto;
@@ -1014,6 +1061,7 @@ dd {
   margin: 20px 0;
 }
 .connect-steps {
+  list-style: decimal;
   padding-left: 24px;
   margin: 24px 0;
 }
@@ -1029,8 +1077,8 @@ dd {
 
 /* Signed-out public page: editorial landing over the same ledger tokens. */
 .public {
-  --serif: Georgia, "Times New Roman", serif;
-  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --serif: var(--font-display);
+  --mono: var(--font-mono);
   --deep: #163a2b;
   min-height: 100vh;
   display: flex;
@@ -1110,7 +1158,7 @@ dd {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.16em;
-  text-transform: uppercase;
+  text-transform: var(--ui-case);
   color: var(--green);
 }
 .eyebrow::before {
@@ -1165,7 +1213,7 @@ dd {
   opacity: 1;
   background: transparent;
   border: 1px dashed #b4c2b3;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 .landing-link {
   min-height: 44px;
@@ -1227,8 +1275,8 @@ dd {
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
+  text-transform: var(--ui-case);
+  color: var(--muted-foreground);
   padding-bottom: 18px;
   border-bottom: 1px solid #edf0e9;
 }
@@ -1245,7 +1293,7 @@ dd {
 }
 .ledger-coverage {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 .ledger-rows {
   list-style: none;
@@ -1280,14 +1328,14 @@ dd {
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
+  text-transform: var(--ui-case);
   color: var(--green);
 }
 .ledger figcaption {
   position: relative;
   margin-top: 34px;
   font-size: 12px;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 .landing-steps {
   list-style: none;
@@ -1515,4 +1563,19 @@ dd {
     flex-direction: column;
     padding: 20px 0 28px;
   }
+}
+
+/* Keep the labeled, keyboard-focusable ledger region as the scroll owner. */
+.table-scroll > [data-slot="table-container"] {
+  overflow: visible;
+}
+
+[data-slot="input"] {
+  height: auto;
+  box-shadow: none;
+}
+
+.brand,
+.nav-label {
+  text-transform: var(--ui-case);
 }

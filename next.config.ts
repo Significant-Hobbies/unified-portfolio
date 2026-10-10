@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 const config: NextConfig = {
   poweredByHeader: false,
+  transpilePackages: ["@saas-maker/ui"],
   logging: false,
   devIndicators: false,
   async headers() {
