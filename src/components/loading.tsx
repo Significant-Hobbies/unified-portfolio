@@ -1,4 +1,8 @@
-import { Skeleton } from "@saas-maker/ui/components/skeleton";
+import {
+  Skeleton,
+  SkeletonBlock,
+  SkeletonContainer,
+} from "@saas-maker/ui/components/skeleton";
 import type { ReactNode } from "react";
 
 function Line({ className = "" }: { className?: string }) {
@@ -25,10 +29,9 @@ function LoadingPage({
   children: ReactNode;
 }) {
   return (
-    <div className="ledger-loading" role="status" aria-busy="true">
-      <span className="sr-only">{label}</span>
+    <SkeletonContainer className="ledger-loading" aria-label={label}>
       <div aria-hidden="true">{children}</div>
-    </div>
+    </SkeletonContainer>
   );
 }
 
@@ -46,7 +49,11 @@ function Chart() {
           ))}
         </div>
       </div>
-      <Skeleton className="ledger-skeleton skeleton-chart" />
+      <SkeletonBlock
+        announce={false}
+        aspectRatio="800 / 240"
+        className="skeleton-chart"
+      />
       <div className="chart-range chart-dates">
         <Line className="skeleton-caption" />
         <Line className="skeleton-caption" />
@@ -144,7 +151,29 @@ export function HoldingsLoading() {
       <section className="panel">
         <Line className="skeleton-section-title" />
         <Line className="skeleton-footnote" />
-        <Line className="skeleton-control" />
+        <div className="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                {Array.from({ length: 7 }, (_, i) => (
+                  <th key={i}>
+                    <Line className="skeleton-cell" />
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {Array.from({ length: 7 }, (_, i) => (
+                  <td key={i}>
+                    <Line className="skeleton-cell" />
+                    {i < 2 && <Line className="skeleton-caption" />}
+                  </td>
+                ))}
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </LoadingPage>
   );

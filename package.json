@@ -25,7 +25,7 @@
     "@cfworker/json-schema": "^4.1.1",
     "@modelcontextprotocol/sdk": "1.30.0",
     "@saas-maker/app-health": "https://github.com/sass-maker/app-health/releases/download/node-v0.4.0/saas-maker-app-health-0.4.0.tgz",
-    "@saas-maker/ui": "github:sass-maker/ui-library#v0.1.18&path:/packages/ui",
+    "@saas-maker/ui": "github:sass-maker/ui-library#v0.1.19&path:/packages/ui",
     "decimal.js": "^10.6.0",
     "jose": "^6.2.12",
     "next": "16.3.5",

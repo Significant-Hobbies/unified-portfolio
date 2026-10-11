@@ -16,7 +16,7 @@ export default async function Holdings() {
       {d.current.holdings.length ? (
         <HoldingsTable holdings={d.current.holdings} />
       ) : (
-        <Empty title="Your holdings will appear here" />
+        <Empty title="your holdings will appear here" />
       )}
       {d.snapshots.some((s) => s.positions.length > 0) && (
         <section className="panel">

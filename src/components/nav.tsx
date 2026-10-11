@@ -14,7 +14,11 @@ export function Nav() {
     <nav aria-label="Main navigation">
       {routes.map(([href, label, icon]) => (
         <NavLink key={href}>
-          <Link href={href} aria-current={path === href ? "page" : undefined}>
+          <Link
+            href={href}
+            prefetch={true}
+            aria-current={path === href ? "page" : undefined}
+          >
             <span aria-hidden="true">{icon}</span>
             {label}
           </Link>

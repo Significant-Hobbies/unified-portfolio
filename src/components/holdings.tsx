@@ -1,6 +1,7 @@
 "use client";
 import {
   Input,
+  Button,
   Table,
   TableHeader,
   TableBody,
@@ -9,6 +10,7 @@ import {
   TableCell,
 } from "./primitives";
 import { useState } from "react";
+import { EmptyState } from "@saas-maker/ui/components/empty-state";
 import Decimal from "decimal.js";
 import type { Holding } from "../core/model";
 import { money, names, syncDate } from "./ui";
@@ -180,7 +182,26 @@ export function HoldingsTable({ holdings }: { holdings: Holding[] }) {
           </TableBody>
         </Table>
         {!rows.length && (
-          <p className="no-results">No holdings match these filters.</p>
+          <EmptyState
+            className="no-results"
+            title="no holdings match these filters."
+            primaryAction={
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSearch("");
+                  setOwner("");
+                  setBroker("");
+                  setAsset("");
+                  setCountry("");
+                  setExchange("");
+                  setGain("");
+                }}
+              >
+                clear filters
+              </Button>
+            }
+          />
         )}
       </div>
       <p className="footnote">

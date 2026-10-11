@@ -9,6 +9,7 @@ import {
   TableCell,
 } from "./primitives";
 import { useState } from "react";
+import { EmptyState } from "@saas-maker/ui/components/empty-state";
 import { money } from "./ui";
 export function HistoryChart({
   rows,
@@ -62,10 +63,11 @@ export function HistoryChart({
         </div>
       </div>
       {points.length < 2 ? (
-        <div className="chart-empty">
-          <p>History builds with each daily snapshot.</p>
-          <small>At least two observations are needed for this period.</small>
-        </div>
+        <EmptyState
+          className="chart-empty"
+          title="history builds with each daily snapshot."
+          description="at least two observations are needed for this period."
+        />
       ) : (
         <>
           <svg
