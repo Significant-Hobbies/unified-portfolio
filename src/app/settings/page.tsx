@@ -1,3 +1,4 @@
+import { Button } from "../../components/primitives";
 import { indmoneyScope } from "../../server/preferences";
 import { withUser } from "../../server/tenant";
 import { sessionIdentity } from "../../server/auth";
@@ -116,16 +117,16 @@ export default async function Settings({
               </p>
               <form action="/oauth/approve" method="post">
                 <input type="hidden" name="consent" value={q.consent} />
-                <button className="button" name="decision" value="approve">
+                <Button className="button" name="decision" value="approve">
                   Allow read-only access
-                </button>
-                <button
+                </Button>
+                <Button
                   className="button secondary"
                   name="decision"
                   value="deny"
                 >
                   Deny
-                </button>
+                </Button>
               </form>
             </section>
           )}
@@ -143,7 +144,7 @@ export default async function Settings({
                   <option value="ALL">All INDmoney assets</option>
                 </select>
               </label>
-              <button className="button secondary">Save INDmoney scope</button>
+              <Button className="button secondary">Save INDmoney scope</Button>
             </form>
             <p>
               Wallet cash is included when reported. Converted USD estimates are
@@ -175,9 +176,9 @@ export default async function Settings({
               </code>
             </div>
             <form action="/api/revoke-mcp" method="post">
-              <button className="button secondary">
+              <Button className="button secondary">
                 Revoke all MCP access
-              </button>
+              </Button>
             </form>
           </section>
           <section className="panel">
@@ -201,7 +202,7 @@ export default async function Settings({
               </div>
             </dl>
             <form action="/api/logout" method="post">
-              <button className="button secondary">Sign out</button>
+              <Button className="button secondary">Sign out</Button>
             </form>
           </section>
         </>

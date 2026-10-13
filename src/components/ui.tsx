@@ -1,3 +1,5 @@
+import { Button } from "./primitives";
+import { EmptyState } from "@saas-maker/ui/components/empty-state";
 import Link from "next/link";
 import type { Portfolio } from "../core/portfolio";
 import type { Connection } from "../core/model";
@@ -105,23 +107,26 @@ export function Freshness({ portfolio: p }: { portfolio: Portfolio }) {
   );
 }
 export function Empty({
-  title = "Your portfolio starts here",
-  text = "Connect an investment account to see your holdings, allocation and history.",
+  title = "your portfolio starts here",
+  text = "connect an investment account to see your holdings, allocation and history.",
 }: {
   title?: string;
   text?: string;
 }) {
   return (
-    <div className="empty">
-      <div className="empty-mark" aria-hidden="true">
-        ◎
-      </div>
-      <h2>{title}</h2>
-      <p>{text}</p>
-      <Link className="button" href="/accounts">
-        Connect investments <span aria-hidden="true">↗</span>
-      </Link>
-    </div>
+    <EmptyState
+      className="empty"
+      icon={<span className="empty-mark">◎</span>}
+      title={title}
+      description={<p>{text}</p>}
+      primaryAction={
+        <Button asChild>
+          <Link href="/accounts">
+            connect investments <span aria-hidden="true">↗</span>
+          </Link>
+        </Button>
+      }
+    />
   );
 }
 export function ProviderAction({
@@ -137,12 +142,12 @@ export function ProviderAction({
 }) {
   return (
     <form action={`/api/providers/${id}/${action}`} method="post">
-      <button
+      <Button
         disabled={disabled}
         className={action === "disconnect" ? "text-button" : "button secondary"}
       >
         {label}
-      </button>
+      </Button>
     </form>
   );
 }

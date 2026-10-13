@@ -1,14 +1,31 @@
 "use client";
-export default function ErrorPage({ reset }: { reset: () => void }) {
+import { Button } from "../components/primitives";
+import { ErrorState } from "@saas-maker/ui/components/error-state";
+export default function ErrorPage({
+  retry,
+  unstable_retry,
+}: {
+  retry?: () => void;
+  unstable_retry?: () => void;
+}) {
   return (
-    <div className="empty">
-      <h1>Your portfolio is temporarily unavailable</h1>
-      <p>
-        Stored observations have not been replaced. Try loading the page again.
-      </p>
-      <button className="button" onClick={reset}>
-        Try again
-      </button>
-    </div>
+    <ErrorState
+      className="empty"
+      title="your portfolio is temporarily unavailable"
+      description={
+        <p>
+          stored observations have not been replaced. try loading the page
+          again.
+        </p>
+      }
+      primaryAction={
+        <Button
+          className="button"
+          onClick={retry ?? unstable_retry ?? (() => window.location.reload())}
+        >
+          try again
+        </Button>
+      }
+    />
   );
 }

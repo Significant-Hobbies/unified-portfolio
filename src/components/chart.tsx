@@ -1,5 +1,15 @@
 "use client";
+import {
+  Button,
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "./primitives";
 import { useState } from "react";
+import { EmptyState } from "@saas-maker/ui/components/empty-state";
 import { money } from "./ui";
 export function HistoryChart({
   rows,
@@ -40,21 +50,24 @@ export function HistoryChart({
         </div>
         <div className="periods" role="group" aria-label="History period">
           {Object.keys(ranges).map((p) => (
-            <button
+            <Button
+              variant="ghost"
+              className="period-button"
               key={p}
               aria-pressed={p === period}
               onClick={() => setPeriod(p)}
             >
               {p}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
       {points.length < 2 ? (
-        <div className="chart-empty">
-          <p>History builds with each daily snapshot.</p>
-          <small>At least two observations are needed for this period.</small>
-        </div>
+        <EmptyState
+          className="chart-empty"
+          title="history builds with each daily snapshot."
+          description="at least two observations are needed for this period."
+        />
       ) : (
         <>
           <svg
@@ -84,22 +97,22 @@ export function HistoryChart({
           <details>
             <summary>View daily values</summary>
             <div className="table-scroll">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Value</th>
-                  </tr>
-                </thead>
-                <tbody>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Date</TableHead>
+                    <TableHead>Value</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
                   {points.map((p) => (
-                    <tr key={p.day}>
-                      <td>{p.day}</td>
-                      <td>{money(p.value, currency)}</td>
-                    </tr>
+                    <TableRow key={p.day}>
+                      <TableCell>{p.day}</TableCell>
+                      <TableCell>{money(p.value, currency)}</TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
           </details>
         </>

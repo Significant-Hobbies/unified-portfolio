@@ -1,4 +1,5 @@
 "use client";
+import { Button, Dialog } from "./primitives";
 
 import { useRef, useState } from "react";
 import type { ProviderId } from "../core/model";
@@ -25,26 +26,22 @@ export function ConnectAccount({
       : `Connect ${name}`;
   return (
     <>
-      <button
+      <Button
         className="button secondary"
         onClick={() => dialog.current?.showModal()}
       >
         {label}
-      </button>
-      <dialog
-        ref={dialog}
-        className="connect-dialog"
-        aria-labelledby={`connect-${id}`}
-      >
+      </Button>
+      <Dialog ref={dialog} aria-labelledby={`connect-${id}`}>
         <div className="connect-heading">
           <span className={`broker-logo large ${id}`}>{name[0]}</span>
-          <button
+          <Button
             className="text-button"
             aria-label="Close connection panel"
             onClick={() => dialog.current?.close()}
           >
             Close ×
-          </button>
+          </Button>
         </div>
         <h2 id={`connect-${id}`}>
           {connected ? "Reconnect" : "Connect"} {name}
@@ -91,9 +88,9 @@ export function ConnectAccount({
             rel={id === "zerodha" ? "noopener" : undefined}
             onSubmit={() => setLeaving(true)}
           >
-            <button className="button" disabled={leaving}>
+            <Button className="button" disabled={leaving}>
               {leaving ? `Opening ${name}…` : `Continue to ${name} →`}
-            </button>
+            </Button>
           </form>
         )}
         {id === "zerodha" && ready && (
@@ -103,9 +100,9 @@ export function ConnectAccount({
               here to finish connecting. No developer app or API key is needed.
             </p>
             <form action="/api/providers/zerodha/finish" method="post">
-              <button className="button secondary">
+              <Button className="button secondary">
                 Finish Zerodha connection
-              </button>
+              </Button>
             </form>
           </>
         )}
@@ -119,7 +116,7 @@ export function ConnectAccount({
           Unified Portfolio only reads investment data. Previously synced values
           remain available when you need to sign in again.
         </p>
-      </dialog>
+      </Dialog>
     </>
   );
 }
