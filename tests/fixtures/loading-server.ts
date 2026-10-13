@@ -1,8 +1,7 @@
 // Imported only by loading.vite.ts's test-only aliases; never by the app build.
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { demo } from "./portfolio";
-import { portfolio } from "../../src/core/portfolio";
+import { loadingData } from "./loading-data";
 
 export const cookieName = "portfolio_session";
 export const fixtureToken = "loading-fixture";
@@ -43,26 +42,5 @@ export async function indmoneyScope() {
 export async function view() {
   if (!(await sessionIdentity())) redirect("/settings");
   const mode = await state();
-  const d = demo();
-  const connections = d.connections.filter((c) => c.id !== "angelone");
-  connections[0] = {
-    ...connections[0],
-    status: "NEEDS_LOGIN",
-    errorCode: "SESSION_EXPIRED",
-  };
-  const snapshots =
-    mode === "empty"
-      ? []
-      : d.snapshots.filter((s) => s.provider !== "angelone");
-  if (snapshots[0]) {
-    snapshots[0].holdings[0].averagePrice = null;
-    snapshots[0].holdings[0].investedValue = null;
-  }
-  return {
-    snapshots,
-    connections,
-    current: portfolio(snapshots, connections),
-    history: mode === "empty" ? [] : d.history,
-    setup: false,
-  };
+  return loadingData(mode === "empty");
 }

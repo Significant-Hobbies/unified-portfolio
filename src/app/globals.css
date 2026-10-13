@@ -1,4 +1,6 @@
 @import "@saas-maker/ui/styles.css";
+/* Vite inlines imports before PostCSS; scan the installed UI source explicitly. */
+@source "../../node_modules/@saas-maker/ui/src";
 
 * {
   box-sizing: border-box;
@@ -1608,6 +1610,10 @@ dd {
 
 /* Route fallbacks reuse ledger geometry; placeholders never imply real values. */
 .ledger-loading {
+  min-width: 0;
+}
+/* Fixed-width bones must not impose a min-content width on the grid. */
+.ledger-loading .two-column > .panel {
   min-width: 0;
 }
 .ledger-skeleton {

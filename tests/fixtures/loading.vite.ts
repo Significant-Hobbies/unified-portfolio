@@ -1,3 +1,4 @@
+import { uiSlotAlias } from "../../scripts/ui-slot-alias";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig, type Plugin } from "vite";
@@ -45,6 +46,8 @@ const fixture: Plugin = {
 
 export default defineConfig({
   root,
+  resolve: { alias: [uiSlotAlias] },
+  css: { transformer: "postcss" },
   envDir: fixtureDir,
   plugins: [fixture, vinext()],
   server: { host: "127.0.0.1", port: 3340, strictPort: true },
