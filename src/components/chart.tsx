@@ -76,12 +76,12 @@ export function HistoryChart({
             role="img"
             aria-label={`Portfolio value from ${points[0].day} to ${points.at(-1)!.day}. ${money(points[0].value, currency)} to ${money(points.at(-1)!.value, currency)}.`}
           >
-            <line x1="40" x2="760" y1="190" y2="190" stroke="#dbe2da" />
-            <line x1="40" x2="760" y1="50" y2="50" stroke="#e8ece6" />
+            <line x1="40" x2="760" y1="190" y2="190" stroke="var(--border)" />
+            <line x1="40" x2="760" y1="50" y2="50" stroke="var(--muted)" />
             <path
               d={d}
               fill="none"
-              stroke="#235d45"
+              stroke="var(--brand)"
               strokeWidth="3"
               strokeLinejoin="round"
             />
